@@ -1,14 +1,14 @@
 package com.example.orderUp_api.entity.sql.database;
 
-import com.example.orderUp_api.enums.RoleEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.example.orderUp_api.entity.sql.database.identifier.StringPrefixedSequenceGenerator;
-import com.example.orderUp_api.entity.sql.database.order.OrderBillEntity;
+import com.example.orderUp_api.entity.sql.database.order.shipping.ShippingTaskEntity;
+import com.example.orderUp_api.enums.EmployeeStatus;
 import com.example.orderUp_api.enums.Gender;
-import com.example.orderUp_api.enums.UserStatus;
 import jakarta.persistence.*;
-import lombok.*;
 import org.hibernate.annotations.Parameter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -21,54 +21,50 @@ import java.util.Set;
 import static com.example.orderUp_api.constant.EntityConstant.SEQUENCE_ID_GENERATOR;
 
 @Entity
-@Table(name = "user")
+@Table(name = "employee")
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class UserEntity {
-    //    @GenericGenerator(name = "user_id", strategy = TIME_ID_GENERATOR)
+public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "avatar_id", unique = true)
-    private String avatarId;
+    @Column(unique = true, nullable = false)
+    private String username;
 
-    @Column(name = "avatar_url")
-    private String avatarUrl;
+    @Column(name = "password", nullable = false)
+    private String password;
 
-    @Column(name = "fullname", nullable = false)
-    private String fullname;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(name = "role", nullable = false)
-    private RoleEnum role;
-    @Column
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Column(name = "birth_date")
     private java.sql.Date birthDate;
 
-    @Column(nullable = false)
-    private String password;
-
-    @Column(unique = true, nullable = false)
-    private String email;
-
     @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name = "auth_type")
-    private String authType;
 
-    @Column(name = "coin", nullable = false, columnDefinition = "BIGINT DEFAULT 0")
-    private Long coin;
+    @Column(name = "email")
+    private String email;
+
+//    private ObjectId branchId;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private UserStatus status;
+    @Column(name = "status", nullable = false)
+    private EmployeeStatus status;
+
+    @Column(name = "is_deleted", nullable = false, columnDefinition = "boolean default false")
+    private boolean isDeleted ;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -81,25 +77,18 @@ public class UserEntity {
     private Date updatedAt;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "employee_role",
+            joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roleList;
 
-    // =================================================================
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private List<AddressEntity> addressList;
+    @ManyToOne
+    @JoinColumn(name = "branch_id")
+    @JsonBackReference
+    private BranchEntity branch;
 
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private List<OrderBillEntity> orderBillList;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "employee")
     @JsonManagedReference
-    private List<CoinHistoryEntity> coinHistoryList;
-
-    public String getId() {
-        return String.valueOf(id);
-    }
+    private List<ShippingTaskEntity> shippingTaskList;
 }

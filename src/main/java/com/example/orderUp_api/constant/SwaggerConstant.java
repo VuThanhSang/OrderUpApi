@@ -25,4 +25,14 @@ public class SwaggerConstant {
     public static final String NAME_EX = "Classroom 1";
     public static final String DESCRIPTION_EX = "This is classroom 1";
     public static final String TEACHER_ID_EX = "60f1b0b3b3b3b3b3b3b3b3b";
+    public static final long PRODUCT_PRICE_MIN = 1000;
+    public static final String PRODUCT_SIZE_EX = "M";
+    public static final String PRODUCT_PRICE_EX = "1000";
+    public static final String PRODUCT_NAME_EX = "Coca Cola";
+    public static final String PRODUCT_IMAGE_EX = "https://www.google.com";
+    public static final String PRODUCT_DESCRIPTION_EX = "This is Coca Cola";
+    public static final String TOPPING_NAME_EX = "Caramel";
+    public static final long TOPPING_PRICE_MIN = 1000;
+    public static final String TOPPING_PRICE_EX = "1000";
+
 }

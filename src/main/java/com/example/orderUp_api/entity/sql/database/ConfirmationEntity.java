@@ -1,28 +1,30 @@
 package com.example.orderUp_api.entity.sql.database;
 
 import com.example.orderUp_api.enums.ConfirmationCodeStatus;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.Date;
 
-@Document(collection = "confirmation")
+@Entity
+@Table(name = "confirmation")
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConfirmationEntity {
-    @MongoId
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String code;
 
     private String email;
 
+    @Enumerated(EnumType.STRING)
     private ConfirmationCodeStatus status;
 
     private Date expireAt;
