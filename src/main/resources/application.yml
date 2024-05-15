@@ -1,0 +1,84 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    url: ${SQL_URL:jdbc:mysql://localhost:3306/order_up}
+    username: root
+    password: 0908218507
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  application:
+    name: learning_api
+  config:
+    import: optional:file:.env[.properties]
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+  main:
+    allow-bean-definition-overriding: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_ID}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    verify:
+      host: http://localhost:8080
+  kafka:
+    bootstrap-servers: http://localhost:9092
+    producer:
+      acks: -1
+      bootstrap-servers: http://localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties.[enable.idempotence]: true
+      properties.[max.in.flight.requests.per.connection]: 5
+    consumer:
+      bootstrap-servers: http://localhost:9092
+      group-id: group-01
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.example.learning_api.dto.*
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+              - openid
+security:
+  jwt:
+    accessTokenKey: YourAccessTokenKey
+    refreshTokenKey: YourRefreshTokenKey
+cloudinary:
+  cloud_name: ${CLOUDINARY_NAME}
+  api_key: ${CLOUDINARY_API_KEY}
+  api_secret: ${CLOUDINARY_API_SECRET}
+
+server:
+  port: 8080
+
+google:
+  api:
+    key: ${GOOGLE_API_KEY}

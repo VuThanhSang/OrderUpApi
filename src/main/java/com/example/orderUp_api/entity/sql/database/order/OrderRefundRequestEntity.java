@@ -1,0 +1,62 @@
+package com.example.orderUp_api.entity.sql.database.order;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.example.orderUp_api.enums.AnswerStatus;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.util.Date;
+import java.util.List;
+
+import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
+
+@Entity
+@Table(name = "order_refund_request")
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+public class OrderRefundRequestEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "reason", nullable = false)
+    private String reason;
+
+    @Column(name = "note")
+    private String note;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private AnswerStatus status;
+
+    @OneToOne
+    @JsonBackReference
+    @JoinColumn(name = "order_bill_id", nullable = false)
+    private OrderBillEntity orderBill;
+
+
+    // =================================================
+
+    @OneToMany(cascade = {CascadeType.PERSIST})
+    @JsonManagedReference
+    private List<OrderRefundMediaEntity> orderReturnMediaList;
+
+}
