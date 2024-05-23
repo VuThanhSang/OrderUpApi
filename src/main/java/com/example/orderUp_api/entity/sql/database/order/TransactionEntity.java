@@ -24,8 +24,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @EntityListeners(AuditingEntityListener.class)
 public class TransactionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "transaction_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "transaction_id")
+    private String id;
 
     @OneToOne
     @JoinColumn(name = "order_bill_id", nullable = false)

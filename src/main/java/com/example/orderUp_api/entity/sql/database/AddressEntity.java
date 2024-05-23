@@ -16,8 +16,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @AllArgsConstructor
 public class AddressEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "address_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "address_id")
+    private String id;
 
     @Column(nullable = false)
     private String detail;

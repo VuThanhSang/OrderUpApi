@@ -20,8 +20,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @AllArgsConstructor
 public class ToppingEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "size_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "size_id")
+    private String id;
 
     @Column(name = "name", nullable = false)
     private String name;

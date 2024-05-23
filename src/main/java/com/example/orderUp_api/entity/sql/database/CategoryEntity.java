@@ -26,8 +26,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @EntityListeners(AuditingEntityListener.class)
 public class CategoryEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "category_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "category_id")
+    private String id;
 
     @Column(nullable = false)
     private String name;

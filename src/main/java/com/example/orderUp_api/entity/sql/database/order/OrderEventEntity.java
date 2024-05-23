@@ -25,8 +25,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 //@EntityListeners({AuditingEntityListener.class, OrderEventListener.class})
 public class OrderEventEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "order_event_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "order_event_id")
+    private String id;
 
 
     @Enumerated(EnumType.STRING)

@@ -41,7 +41,6 @@ public class UserAuthController {
     private final IUserAuthService userAuthService;
     private static final Logger logger = LoggerFactory.getLogger(UserAuthController.class);
     private final ClientRegistrationRepository clientRegistrationRepository;
-    @Operation(summary = USER_AUTH_REGISTER_SUM, description = USER_AUTH_REGISTER_DESC)
     @PostMapping(POST_USER_AUTH_REGISTER_SUB_PATH)
     public ResponseEntity<ResponseAPI<RegisterResponse>> registerUser(@RequestBody @Valid RegisterUserRequest body) {
         try{
@@ -98,7 +97,6 @@ public class UserAuthController {
 
     }
 
-    @Operation(summary = USER_AUTH_LOGIN_SUM)
     @PostMapping(POST_USER_AUTH_LOGIN_SUB_PATH)
     public ResponseEntity<ResponseAPI<LoginResponse>> loginUser(@RequestBody @Valid LoginUserRequest body) {
 
@@ -158,7 +156,6 @@ public class UserAuthController {
 
     }
 
-    @Operation(summary = USER_AUTH_LOGOUT_SUM)
     @GetMapping(USER_AUTH_LOGOUT_PATH)
     public ResponseEntity<ResponseAPI<?>> logoutUser(@CookieValue(name = "refreshToken", required = false) String refreshToken
                                                      ) {
@@ -177,7 +174,6 @@ public class UserAuthController {
     }
 
 
-    @Operation(summary = USER_AUTH_SEND_CODE_TO_EMAIL_TO_REGISTER_SUM)
     @PostMapping(POST_USER_AUTH_SEND_CODE_TO_REGISTER_SUB_PATH)
     public ResponseEntity<ResponseAPI<?>> sendCodeToRegister(@RequestBody @Valid SendCodeRequest body) {
         try {
@@ -199,7 +195,6 @@ public class UserAuthController {
 
     }
 
-    @Operation(summary = USER_AUTH_SEND_CODE_TO_EMAIL_TO_GET_PWD_SUM)
     @PostMapping(POST_AUTH_SEND_CODE_FORGOT_PWD)
     public ResponseEntity<ResponseAPI<?>> sendCodeToGetPassword(@RequestBody @Valid SendCodeRequest body) {
         try {
@@ -219,7 +214,6 @@ public class UserAuthController {
 
     }
 
-    @Operation(summary = USER_AUTH_VERIFY_EMAIL_SUM)
     @PostMapping(POST_USER_AUTH_VERIFY_EMAIL_SUB_PATH)
     public ResponseEntity<ResponseAPI<?>> verifyCodeByEmail(@RequestBody @Valid VerifyEmailRequest body) {
 
@@ -241,7 +235,6 @@ public class UserAuthController {
 
 
 
-    @Operation(summary = USER_AUTH_CHANGE_PASSWORD_SUM)
     @PatchMapping(PATCH_USER_AUTH_CHANGE_PASSWORD_SUB_PATH)
     public ResponseEntity<ResponseAPI<?>> changePasswordForgot(@RequestBody @Valid ChangePasswordRequest body) {
         try {

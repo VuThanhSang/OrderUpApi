@@ -20,8 +20,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @AllArgsConstructor
 public class CouponUsedEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "coupon_used_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "coupon_used_id")
+    private String id;
 
     @Column(name = "code", nullable = false)
     private String code;

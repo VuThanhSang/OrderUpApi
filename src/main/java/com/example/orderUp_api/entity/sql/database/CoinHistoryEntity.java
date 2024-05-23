@@ -23,8 +23,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @EntityListeners(AuditingEntityListener.class)
 public class CoinHistoryEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "coin_history_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "coin_history_id")
+    private String id;
 
     @Column(name = "coin", nullable = false)
     private Long coin;

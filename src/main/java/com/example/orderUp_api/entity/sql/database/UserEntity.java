@@ -29,10 +29,15 @@ import static com.example.orderUp_api.constant.EntityConstant.SEQUENCE_ID_GENERA
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class UserEntity {
-    //    @GenericGenerator(name = "user_id", strategy = TIME_ID_GENERATOR)
+//        @GenericGenerator(name = "user_id", strategy = TIME_ID_GENERATOR)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "user_id", strategy = SEQUENCE_ID_GENERATOR, parameters = {
+            @Parameter(name = StringPrefixedSequenceGenerator.INCREMENT_PARAM, value = "1"),
+            @Parameter(name = StringPrefixedSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "U"),
+            @Parameter(name = StringPrefixedSequenceGenerator.NUMBER_FORMAT_PARAMETER, value = "%08d")
+    })
+    @GeneratedValue(generator = "user_id")
+    private String id;
 
     @Column(name = "avatar_id", unique = true)
     private String avatarId;
@@ -63,7 +68,7 @@ public class UserEntity {
     @Column(name = "auth_type")
     private String authType;
 
-    @Column(name = "coin", nullable = false, columnDefinition = "BIGINT DEFAULT 0")
+    @Column(name = "coin", columnDefinition = "BIGINT DEFAULT 0")
     private Long coin;
 
     @Enumerated(EnumType.STRING)

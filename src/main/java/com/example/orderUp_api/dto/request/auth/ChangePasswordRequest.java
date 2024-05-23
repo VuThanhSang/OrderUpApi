@@ -18,7 +18,6 @@ public class ChangePasswordRequest {
     @NotBlank
     private String code;
 
-    @Schema(example = PASSWORD_USER_EX)
     @NotBlank
     @Size(min = PASSWORD_LENGTH_MIN, max = PASSWORD_LENGTH_MAX)
     private String password;

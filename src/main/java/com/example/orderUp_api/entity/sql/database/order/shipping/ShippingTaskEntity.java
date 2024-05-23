@@ -21,8 +21,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @EntityListeners({AuditingEntityListener.class})
 public class ShippingTaskEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "shipping_task_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "shipping_task_id")
+    private String id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)

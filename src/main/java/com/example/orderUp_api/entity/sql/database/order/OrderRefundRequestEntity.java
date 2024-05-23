@@ -25,8 +25,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @EntityListeners(AuditingEntityListener.class)
 public class OrderRefundRequestEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "order_refund_request_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "order_refund_request_id")
+    private String id;
     @Column(name = "reason", nullable = false)
     private String reason;
 

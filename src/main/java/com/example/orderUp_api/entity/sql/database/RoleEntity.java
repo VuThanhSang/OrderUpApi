@@ -22,8 +22,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 public class RoleEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "role_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "role_id")
+    private String id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, unique = true)

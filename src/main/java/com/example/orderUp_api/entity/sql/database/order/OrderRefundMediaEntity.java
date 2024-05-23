@@ -22,8 +22,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @EntityListeners(AuditingEntityListener.class)
 public class OrderRefundMediaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "order_refund_media_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "order_refund_media_id")
+    private String id;
 
     @Column(name = "media_url")
     private String mediaUrl;

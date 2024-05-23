@@ -18,8 +18,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @AllArgsConstructor
 public class MoneyRewardEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "money_reward_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "money_reward_id")
+    private String id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "unit", nullable = false)

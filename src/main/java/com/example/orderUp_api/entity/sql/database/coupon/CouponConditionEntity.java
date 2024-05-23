@@ -24,8 +24,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @AllArgsConstructor
 public class CouponConditionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "coupon_condition_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "coupon_condition_id")
+    private String id;
 
 //    @Column(name = "description", nullable = false)
 //    private String description;

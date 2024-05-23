@@ -21,8 +21,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @AllArgsConstructor
 public class OrderItemEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "order_item_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "order_item_id")
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)

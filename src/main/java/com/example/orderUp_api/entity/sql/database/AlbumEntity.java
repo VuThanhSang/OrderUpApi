@@ -24,8 +24,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @EntityListeners(AuditingEntityListener.class)
 public class AlbumEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "album_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "album_id")
+    private String id;
 
     @Column(name = "image_url")
     private String imageUrl;

@@ -17,8 +17,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @AllArgsConstructor
 public class MinPurchaseConditionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "min_purchase_order_condition_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "min_purchase_order_condition_id")
+    private String id;
 
 //    @Enumerated(EnumType.STRING)
 //    @Column(name = "type", nullable = false)

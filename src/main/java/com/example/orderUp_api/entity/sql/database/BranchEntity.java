@@ -30,9 +30,10 @@ public class BranchEntity {
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "branch_id")
 //    @SequenceGenerator(name = "branch_id", sequenceName = "branch_id", initialValue = 1, allocationSize = 1)
 //    private Long id;
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
+    @Id
+    @GenericGenerator(name = "branch_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "branch_id")
+    private String id;
     @Column(name = "image_id", nullable = false)
     private String imageId;
 

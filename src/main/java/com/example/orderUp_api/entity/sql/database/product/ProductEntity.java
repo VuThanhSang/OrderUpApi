@@ -33,8 +33,13 @@ import static com.example.orderUp_api.constant.EntityConstant.SEQUENCE_ID_GENERA
 @EntityListeners(AuditingEntityListener.class)
 public class ProductEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "product_id", strategy = SEQUENCE_ID_GENERATOR, parameters = {
+            @Parameter(name = StringPrefixedSequenceGenerator.INCREMENT_PARAM, value = "1"),
+            @Parameter(name = StringPrefixedSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "P"),
+            @Parameter(name = StringPrefixedSequenceGenerator.NUMBER_FORMAT_PARAMETER, value = "%04d")
+    })
+    @GeneratedValue(generator = "product_id", strategy = GenerationType.SEQUENCE)
+    private String id;
 
     @Column(nullable = false)
     private String name;

@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
@@ -23,8 +24,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @EntityListeners(AuditingEntityListener.class)
 public class ProductReviewEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "product_review_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "product_review_id")
+    private String id;
 
     @Column(name = "star", nullable = false, columnDefinition = "INT CHECK(star > 0 and star <= 5)")
     private Integer star;
@@ -38,15 +40,15 @@ public class ProductReviewEntity {
     private Date createdAt;
 
 
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @LastModifiedDate
-//    @Column(name = "updated_at")
-//    private Date updatedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
-    // =================================================
-//    @OneToMany(mappedBy = "productReview")
-//    @JsonManagedReference
-//    private List<UserReviewInteractionEntity> userReviewInteractionList;
+//     =================================================
+    @OneToMany(mappedBy = "productReview")
+    @JsonManagedReference
+    private List<UserReviewInteractionEntity> userReviewInteractionList;
 
     @OneToOne(mappedBy = "productReview")
     @JsonManagedReference

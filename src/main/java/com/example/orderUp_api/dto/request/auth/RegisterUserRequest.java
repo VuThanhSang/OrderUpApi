@@ -25,11 +25,9 @@ public class RegisterUserRequest {
     @NotBlank
     private String username;
 
-    @Schema(example = FULLNAME_EX)
     @NotBlank
     private String fullname;
 
-    @Schema(example = ROLE_EX)
     @NotBlank
     private String role;
 

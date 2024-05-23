@@ -24,8 +24,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @EntityListeners({AuditingEntityListener.class})
 public class CancellationRequestEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "cancellation_request_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "cancellation_request_id")
+    private String id;
 
     @OneToOne
     @JsonBackReference

@@ -24,8 +24,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @EntityListeners(AuditingEntityListener.class)
 public class BannerEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "banner_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "banner_id")
+    private String id;
 
     @Column(unique = true)
     private String name;

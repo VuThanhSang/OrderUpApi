@@ -17,8 +17,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @AllArgsConstructor
 public class ProductRewardReceivedEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "product_reward_received_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "product_reward_received_id")
+    private String id;
 
     @Column(name = "product_id", nullable = false)
     private String productId;

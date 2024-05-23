@@ -17,8 +17,9 @@ import static com.example.orderUp_api.constant.EntityConstant.TIME_ID_GENERATOR;
 @AllArgsConstructor
 public class SubjectConditionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "target_object_condition_id", strategy = TIME_ID_GENERATOR)
+    @GeneratedValue(generator = "target_object_condition_id")
+    private String id;
 
 //    @Enumerated(EnumType.STRING)
 //    @Column(name = "object_type", nullable = false)
